@@ -99,18 +99,18 @@
     }
 </style>
 <script>
+    const $ = i => document.getElementById(i);
     const demo = () => {
-        const url = document.getElementById("url").value;
-        const icon = document.getElementById("icon").value;
-        const left = document.getElementById("left").value;
-        const right = document.getElementById("right").value;
-        const color = document.getElementById("color").value;
-        const res = `<a href="${url}"><img src="http://img.shields.io/badge/${left}-${right}-${color}.svg?logo=${icon}&style=flat"></a>`
-        document.getElementById("result").innerHTML = res;
+        const url = $("url").value;
+        const icon = $("icon").value;
+        const left = $("left").value;
+        const right = $("right").value;
+        const color = $("color").value;
+        $("result").innerHTML = `<a href="${url}"><img src="http://img.shields.io/badge/${left}-${right}-${color}.svg?logo=${icon}&style=flat"></a>`;
     };
-    ["icon", "left", "right", "color"].forEach(v => document.getElementById(v).onchange = demo);
-    document.getElementById("copy").onclick = async () => {
-        const res = document.getElementById("result").innerHTML;
+    ["url", "icon", "left", "right", "color"].forEach(v => $(v).onchange = demo);
+    $("copy").onclick = async () => {
+        const res = $("result").innerHTML;
         if (navigator.clipboard) {
             await navigator.clipboard.writeText(res);
         } else {
@@ -121,9 +121,7 @@
             document.createRange().selectNodeContents(tmp);
             document.execCommand('copy');
         }
-        document.getElementById("copy").textContent = "コピーしました";
-        const sleep = s => new Promise(r => setTimeout(r, s));
-        await sleep(2e3);
-        document.getElementById("copy").textContent = "コピー";
+        $("copy").textContent = "コピーしました";
+        await new Promise(r => setTimeout(r, 2e3)).then(_ => $("copy").textContent = "コピー");
     };
 </script>
