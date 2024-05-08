@@ -1,3 +1,5 @@
+<link rel="icon" href="favicon.ico">
+<title>badge gen</title>
 <table>
     <tbody>
         <tr>
@@ -18,7 +20,7 @@
         </tr>
         <tr>
             <td>バッチ色<a href="https://www.colordic.org/">検索</a></td>
-            <td><input id="color" type="color" value="blue"></td>
+            <td><input id="color" type="color" value="#1572B6"></td>
         </tr>
         <tr>
             <td>スタイル</td>
@@ -119,7 +121,8 @@
         const icon = $("icon").value;
         const left = $("left").value;
         const right = $("right").value;
-        const color = $("color").value;
+        let color = $("color").value;
+        if (color.startsWith('#')) color = color.substring(1);
         const style = $("style").value;
         $("result").innerHTML = `<a href="${url}"><img src="http://img.shields.io/badge/${left}-${right}-${color}.svg?logo=${icon}&style=${style}"></a>`;
     };
