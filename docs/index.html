@@ -3,24 +3,32 @@
 <table>
     <tbody>
         <tr>
-            <td>リンクURL</td>
+            <td>🔗リンクURL</td>
             <td><input id="url" type="text"></td>
         </tr>
         <tr>
-            <td>アイコン名<a href="https://simpleicons.org/">検索</a></td>
-            <td><input id="icon" type="text"></td>
+            <td>アイコン名 <a href="https://simpleicons.org/">検索</a></td>
+            <td><input id="icon" type="text" value="github"></td>
         </tr>
         <tr>
-            <td>テキスト左</td>
-            <td><input id="left" type="text"></td>
+            <td>アイコン色</td>
+            <td><input id="iconC" type="color"></td>
         </tr>
         <tr>
-            <td>テキスト右</td>
-            <td><input id="right" type="text"></td>
+            <td>左テキスト</td>
+            <td><input id="left" type="text" value="left"></td>
         </tr>
         <tr>
-            <td>バッチ色<a href="https://www.colordic.org/">検索</a></td>
-            <td><input id="color" type="color" value="#1572B6"></td>
+            <td>左 色 <a href="https://www.colordic.org/">検索</a></td>
+            <td><input id="leftC" type="color" value="#696969"></td>
+        </tr>
+        <tr>
+            <td>右テキスト</td>
+            <td><input id="right" type="text" value="right"></td>
+        </tr>
+        <tr>
+            <td>右 色 <a href="https://www.colordic.org/">検索</a></td>
+            <td><input id="rightC" type="color" value="#1572B6"></td>
         </tr>
         <tr>
             <td>スタイル</td>
@@ -119,14 +127,15 @@
     const demo = () => {
         const url = $("url").value;
         const icon = $("icon").value;
+        const iconC = $("iconC").value.substring(1);
         const left = $("left").value;
+        const leftC = $("leftC").value.substring(1);
         const right = $("right").value;
-        let color = $("color").value;
-        if (color.startsWith('#')) color = color.substring(1);
+        const rightC = $("rightC").value.substring(1);
         const style = $("style").value;
-        $("result").innerHTML = `<a href="${url}"><img src="http://img.shields.io/badge/${left}-${right}-${color}.svg?logo=${icon}&style=${style}"></a>`;
+        $("result").innerHTML = `<a href="${url}"><img src="http://img.shields.io/badge/${left}-${right}-${rightC}.svg?logo=${icon}&logoColor=${iconC}&labelColor=${leftC}&style=${style}"></a>`;
     };
-    ["url", "icon", "left", "right", "color", "style"].forEach(v => $(v).onchange = demo);
+    ["url", "icon", "iconC", "left", "leftC", "right", "rightC", "style"].forEach(v => $(v).onchange = demo);
     $("copy").onclick = async () => {
         const res = $("result").innerHTML;
         if (navigator.clipboard) {
