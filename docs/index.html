@@ -21,6 +21,20 @@
             <td><input id="color" type="text" value="blue"></td>
         </tr>
         <tr>
+            <td>スタイル</td>
+            <td>
+                <select id="style">
+                    <option>flat</option>
+                    <option>plastic</option>
+                    <option>flat-square</option>
+                    <option>for-the-badge</option>
+                    <option>popout</option>
+                    <option>popout-square</option>
+                    <option>social</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
             <td>サンプル</td>
             <td><div id="result"></div></td>
         </tr>
@@ -106,9 +120,10 @@
         const left = $("left").value;
         const right = $("right").value;
         const color = $("color").value;
-        $("result").innerHTML = `<a href="${url}"><img src="http://img.shields.io/badge/${left}-${right}-${color}.svg?logo=${icon}&style=flat"></a>`;
+        const style = $("style").value;
+        $("result").innerHTML = `<a href="${url}"><img src="http://img.shields.io/badge/${left}-${right}-${color}.svg?logo=${icon}&style=${style}"></a>`;
     };
-    ["url", "icon", "left", "right", "color"].forEach(v => $(v).onchange = demo);
+    ["url", "icon", "left", "right", "color", "style"].forEach(v => $(v).onchange = demo);
     $("copy").onclick = async () => {
         const res = $("result").innerHTML;
         if (navigator.clipboard) {
