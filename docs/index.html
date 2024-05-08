@@ -136,6 +136,7 @@
         $("result").innerHTML = `<a href="${url}"><img src="http://img.shields.io/badge/${left}-${right}-${rightC}.svg?logo=${icon}&logoColor=${iconC}&labelColor=${leftC}&style=${style}"></a>`;
     };
     ["url", "icon", "iconC", "left", "leftC", "right", "rightC", "style"].forEach(v => $(v).onchange = demo);
+    demo();
     $("copy").onclick = async () => {
         const res = $("result").innerHTML;
         if (navigator.clipboard) {
