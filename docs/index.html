@@ -20,7 +20,11 @@
         </tr>
         <tr>
             <td>左-色</td>
-            <td><input id="leftC" type="color" value="#696969"></td>
+            <td>
+                <input id="leftC" type="color" value="#696969"><br />
+                <input id="leftCT" type="text" value="#696969"><br />
+                ※テキスト指定を優先
+            </td>
         </tr>
         <tr>
             <td>右-テキスト</td>
@@ -28,7 +32,11 @@
         </tr>
         <tr>
             <td>右-色</td>
-            <td><input id="rightC" type="color" value="#1572B6"></td>
+            <td>
+                <input id="rightC" type="color" value="#1572B6"><br />
+                <input id="rightCT" type="text" value="#1572B6"><br />
+                ※テキスト指定を優先
+            </td>
         </tr>
         <tr>
             <td>スタイル</td>
@@ -130,12 +138,16 @@
         const iconC = $("iconC").value.substring(1);
         const left = $("left").value;
         const leftC = $("leftC").value.substring(1);
+        const leftCT = $("leftCT").value.substring(1);
+        const LC = leftCT ? leftCT : leftC;
         const right = $("right").value;
         const rightC = $("rightC").value.substring(1);
+        const rightCT = $("rightCT").value.substring(1);
+        const RC = rightCT ? rightCT : rightC;
         const style = $("style").value;
-        $("result").innerHTML = `<a href="${url}"><img src="http://img.shields.io/badge/${left}-${right}-${rightC}.svg?logo=${icon}&logoColor=${iconC}&labelColor=${leftC}&style=${style}"></a>`;
+        $("result").innerHTML = `<a href="${url}"><img src="http://img.shields.io/badge/${left}-${right}-${RC}.svg?logo=${icon}&logoColor=${iconC}&labelColor=${LC}&style=${style}"></a>`;
     };
-    ["url", "icon", "iconC", "left", "leftC", "right", "rightC", "style"].forEach(v => $(v).onchange = demo);
+    ["url", "icon", "iconC", "left", "leftC", "leftCT", "right", "rightC", "rightCT", "style"].forEach(v => $(v).onchange = demo);
     demo();
     $("copy").onclick = async () => {
         const res = $("result").innerHTML;
