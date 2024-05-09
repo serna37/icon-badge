@@ -27,6 +27,10 @@
             </td>
         </tr>
         <tr>
+            <td>左なし</td>
+            <td><input id="isL" type="checkbox"></td>
+        </tr>
+        <tr>
             <td>右-テキスト</td>
             <td><input id="right" type="text" value="right"></td>
         </tr>
@@ -140,14 +144,15 @@
         const leftC = $("leftC").value.substring(1);
         const leftCT = $("leftCT").value.substring(1);
         const LC = leftCT ? leftCT : leftC;
+        const isL = !$("isL").checked;
         const right = $("right").value;
         const rightC = $("rightC").value.substring(1);
         const rightCT = $("rightCT").value.substring(1);
         const RC = rightCT ? rightCT : rightC;
         const style = $("style").value;
-        $("result").innerHTML = `<a href="${url}"><img src="http://img.shields.io/badge/${left}-${right}-${RC}.svg?logo=${icon}&logoColor=${iconC}&labelColor=${LC}&style=${style}"></a>`;
+        $("result").innerHTML = `<a href="${url}"><img src="http://img.shields.io/badge/${isL ? left : ""}-${right}-${RC}.svg?logo=${icon}&logoColor=${iconC}${isL ? `&labelColor=${LC}` : ""}&style=${style}"></a>`;
     };
-    ["url", "icon", "iconC", "left", "leftC", "leftCT", "right", "rightC", "rightCT", "style"].forEach(v => $(v).onchange = demo);
+    ["url", "icon", "iconC", "left", "leftC", "leftCT", "isL", "right", "rightC", "rightCT", "style"].forEach(v => $(v).onchange = demo);
     demo();
     $("copy").onclick = async () => {
         const res = $("result").innerHTML;
